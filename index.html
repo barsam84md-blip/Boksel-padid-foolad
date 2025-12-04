@@ -1,0 +1,1837 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>بکسل پدید فولاد</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="/_sdk/data_sdk.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <style>
+    body {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Vazirmatn', 'Tahoma', sans-serif;
+      background: #ffffff;
+      color: #1a1a1a;
+      line-height: 1.8;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    /* Top Social Bar */
+    .social-bar {
+      background: #ffffff;
+      padding: 0.5rem 2rem;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 0.8rem;
+      border-bottom: 3px solid #ffd700;
+    }
+
+    .social-link {
+      background: #ffd700;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      text-decoration: none;
+      color: #1a1a1a;
+      font-weight: 600;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.3s;
+      border: 2px solid #ffd700;
+    }
+
+    .social-link:hover {
+      background: #ffed4e;
+      border-color: #ffed4e;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4);
+    }
+
+    .social-link svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .social-link.instagram:hover {
+      background: #ffed4e;
+      border-color: #ffed4e;
+    }
+
+    .social-link.telegram:hover {
+      background: #ffed4e;
+      border-color: #ffed4e;
+    }
+
+    .lang-switch {
+      background: #ffd700;
+      border: 2px solid #ffd700;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.3s;
+      color: #1a1a1a;
+    }
+
+    .lang-switch:hover {
+      background: #ffed4e;
+      border-color: #ffed4e;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4);
+    }
+
+    /* Header */
+    .header {
+      background: #ffffff;
+      padding: 1.5rem 2rem;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 3px solid #ffd700;
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .logo-img {
+      height: 70px;
+      width: auto;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      border: 2px solid #ffd700;
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .logo-main-text {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #1a1a1a;
+      text-shadow: none;
+    }
+
+    .logo-slogan {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #7f8c8d;
+      font-style: italic;
+    }
+
+    .nav {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .nav a {
+      color: #1a1a1a;
+      text-decoration: none;
+      transition: all 0.3s;
+      font-weight: 600;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      position: relative;
+      border: 2px solid transparent;
+    }
+
+    .nav a:hover {
+      color: #ffd700;
+      border-bottom: 3px solid #ffd700;
+      transform: translateY(-2px);
+    }
+
+    /* Cart Button */
+    .cart-btn {
+      position: fixed;
+      bottom: 2rem;
+      left: 2rem;
+      background: #ffd700;
+      color: #1a1a1a;
+      padding: 1rem 1.5rem;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 1.1rem;
+      box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+      transition: all 0.3s;
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .cart-btn:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 20px rgba(255, 215, 0, 0.5);
+      background: #ffed4e;
+    }
+
+    .cart-count {
+      background: #1a1a1a;
+      color: #ffd700;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      font-weight: bold;
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 4rem 2rem;
+      text-align: center;
+      background: #1a1a1a;
+      border-bottom: 4px solid #ffd700;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(0,0,0,0.03)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+      pointer-events: none;
+    }
+
+    .hero-content {
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      color: #ffffff;
+      font-weight: 900;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .hero-subtitle {
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+      color: #ffffff;
+      font-weight: 500;
+    }
+
+    .hero-badges {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    .badge {
+      background: #ffd700;
+      padding: 1rem 2rem;
+      border-radius: 5px;
+      border: 2px solid #ffd700;
+      font-weight: 700;
+      color: #1a1a1a;
+      box-shadow: 0 2px 10px rgba(255, 215, 0, 0.3);
+      transition: all 0.3s;
+    }
+
+    .badge:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 15px rgba(255, 215, 0, 0.5);
+      background: #ffed4e;
+      border-color: #ffed4e;
+    }
+
+    /* Section Styles */
+    .section {
+      padding: 4rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      color: #1a1a1a;
+      margin-bottom: 3rem;
+      text-align: center;
+      position: relative;
+      padding-bottom: 1rem;
+      font-weight: 800;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: 50%;
+      transform: translateX(50%);
+      width: 120px;
+      height: 5px;
+      background: linear-gradient(90deg, #ffd700, #ffed4e);
+      border-radius: 3px;
+    }
+
+    /* About Section */
+    .about-content {
+      background: #f8f8f8;
+      padding: 3rem;
+      border-radius: 10px;
+      border-left: 5px solid #ffd700;
+      line-height: 2;
+      font-size: 1.1rem;
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+      color: #1a1a1a;
+    }
+
+    /* Services Grid */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .service-card {
+      background: #ffffff;
+      padding: 2.5rem;
+      border-radius: 10px;
+      border: 1px solid #e0e0e0;
+      transition: all 0.3s;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    .service-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      border-color: #ffd700;
+    }
+
+    .service-icon {
+      font-size: 3.5rem;
+      margin-bottom: 1.5rem;
+      filter: grayscale(0);
+    }
+
+    .service-title {
+      font-size: 1.4rem;
+      color: #1a1a1a;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+
+    .service-card p {
+      color: #7f8c8d;
+    }
+
+    /* Products Grid */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2.5rem;
+      margin-top: 2rem;
+    }
+
+    .product-card {
+      background: #ffffff;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid #e0e0e0;
+      transition: all 0.3s;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    .product-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      border-color: #ffd700;
+    }
+
+    .product-image {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      border-bottom: 3px solid #ffd700;
+    }
+
+    .product-content {
+      padding: 2rem;
+    }
+
+    .product-title {
+      font-size: 1.6rem;
+      color: #1a1a1a;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+
+    .product-description {
+      margin-bottom: 0.8rem;
+      color: #7f8c8d;
+      line-height: 1.6;
+    }
+
+    .product-price {
+      font-size: 1.3rem;
+      color: #1a1a1a;
+      font-weight: 800;
+      margin: 1rem 0;
+    }
+
+    .product-actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .details-btn, .add-to-cart-btn {
+      flex: 1;
+      border: none;
+      padding: 0.9rem 1.5rem;
+      border-radius: 5px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 1rem;
+    }
+
+    .details-btn {
+      background: transparent;
+      color: #1a1a1a;
+      border: 2px solid #1a1a1a;
+    }
+
+    .details-btn:hover {
+      background: #1a1a1a;
+      color: #ffffff;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(26, 26, 26, 0.3);
+    }
+
+    .add-to-cart-btn {
+      background: #ffd700;
+      color: #1a1a1a;
+      border: 2px solid #ffd700;
+    }
+
+    .add-to-cart-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4);
+      background: #ffed4e;
+      border-color: #ffed4e;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 1000;
+      overflow-y: auto;
+    }
+
+    .modal-content {
+      background: #ffffff;
+      margin: 2rem auto;
+      padding: 3rem;
+      border-radius: 10px;
+      max-width: 800px;
+      border: none;
+      position: relative;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 1.5rem;
+      left: 1.5rem;
+      font-size: 2rem;
+      color: #1a1a1a;
+      cursor: pointer;
+      background: transparent;
+      border: 2px solid #e0e0e0;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+    }
+
+    .close-modal:hover {
+      background: #ffd700;
+      color: #1a1a1a;
+      border-color: #ffd700;
+      transform: rotate(90deg);
+    }
+
+    .modal h2 {
+      color: #1a1a1a;
+      margin-bottom: 1.5rem;
+      font-size: 2rem;
+      font-weight: 800;
+    }
+
+    .modal h3 {
+      color: #ffd700;
+      margin-top: 1.5rem;
+      margin-bottom: 0.8rem;
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+
+    .modal p, .modal ul {
+      line-height: 1.8;
+      margin-bottom: 1rem;
+      color: #1a1a1a;
+    }
+
+    .modal ul {
+      padding-right: 1.5rem;
+    }
+
+    .modal li {
+      margin-bottom: 0.5rem;
+    }
+
+    /* Cart Modal */
+    .cart-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 1001;
+      overflow-y: auto;
+    }
+
+    .cart-modal-content {
+      background: #ffffff;
+      margin: 2rem auto;
+      padding: 3rem;
+      border-radius: 10px;
+      max-width: 900px;
+      border: none;
+      position: relative;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem;
+      border-bottom: 1px solid #e0e0e0;
+      gap: 1rem;
+    }
+
+    .cart-item-info {
+      flex: 1;
+    }
+
+    .cart-item-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 0.5rem;
+    }
+
+    .cart-item-price {
+      color: #ffd700;
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    .cart-item-quantity {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .qty-btn {
+      background: #ffd700;
+      border: none;
+      width: 35px;
+      height: 35px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 1.1rem;
+      transition: all 0.3s;
+      color: #1a1a1a;
+    }
+
+    .qty-btn:hover {
+      background: #ffed4e;
+      transform: scale(1.1);
+    }
+
+    .remove-item-btn {
+      background: transparent;
+      color: #e74c3c;
+      border: 2px solid #e74c3c;
+      padding: 0.6rem 1.2rem;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    .remove-item-btn:hover {
+      background: #e74c3c;
+      color: #ffffff;
+      transform: scale(1.05);
+    }
+
+    .cart-total {
+      text-align: center;
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 3px solid #ffd700;
+    }
+
+    .cart-total-amount {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #1a1a1a;
+      margin-bottom: 2rem;
+    }
+
+    .checkout-btn {
+      background: #1a1a1a;
+      color: #ffd700;
+      border: none;
+      padding: 1.2rem 3rem;
+      border-radius: 5px;
+      font-weight: 800;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .checkout-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 15px rgba(26, 26, 26, 0.4);
+      background: #2a2a2a;
+    }
+
+    /* Checkout Form */
+    .checkout-form {
+      display: none;
+      margin-top: 2rem;
+      padding: 2rem;
+      background: #f8f8f8;
+      border-radius: 10px;
+      border: 1px solid #e0e0e0;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+      color: #1a1a1a;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 1rem;
+      border: 2px solid #e0e0e0;
+      border-radius: 5px;
+      font-size: 1rem;
+      transition: all 0.3s;
+      background: #ffffff;
+      color: #1a1a1a;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: #ffd700;
+      box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.2);
+    }
+
+    .submit-order-btn {
+      background: #1a1a1a;
+      color: #ffd700;
+      border: none;
+      padding: 1.2rem 3rem;
+      border-radius: 5px;
+      font-weight: 800;
+      font-size: 1.2rem;
+      cursor: pointer;
+      width: 100%;
+      transition: all 0.3s;
+    }
+
+    .submit-order-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 15px rgba(26, 26, 26, 0.4);
+      background: #2a2a2a;
+    }
+
+    .submit-order-btn:disabled {
+      background: #bdc3c7;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .success-message {
+      display: none;
+      background: #d4edda;
+      color: #155724;
+      padding: 2rem;
+      border-radius: 10px;
+      text-align: center;
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-top: 2rem;
+      border: 2px solid #c3e6cb;
+    }
+
+    /* Industries Grid */
+    .industries-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .industry-item {
+      background: #ffffff;
+      padding: 2rem;
+      border-radius: 10px;
+      text-align: center;
+      border: 1px solid #e0e0e0;
+      transition: all 0.3s;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      color: #1a1a1a;
+    }
+
+    .industry-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      border-color: #ffd700;
+    }
+
+    .industry-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Contact Section */
+    .contact-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .contact-card {
+      background: #ffffff;
+      padding: 2.5rem;
+      border-radius: 10px;
+      border: 1px solid #e0e0e0;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s;
+    }
+
+    .contact-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      border-color: #ffd700;
+    }
+
+    .contact-icon {
+      font-size: 3.5rem;
+      color: #ffd700;
+      margin-bottom: 1rem;
+    }
+
+    .contact-title {
+      font-size: 1.5rem;
+      color: #1a1a1a;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+
+    .contact-info {
+      line-height: 2;
+      color: #7f8c8d;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1a1a1a;
+      color: #ecf0f1;
+      padding: 3rem;
+      text-align: center;
+      margin-top: 4rem;
+      border-top: 4px solid #ffd700;
+    }
+
+    .footer p {
+      margin: 0.5rem 0;
+      font-weight: 600;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .hero-subtitle {
+        font-size: 1.2rem;
+      }
+
+      .section-title {
+        font-size: 2rem;
+      }
+
+      .nav {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .logo-img {
+        height: 50px;
+      }
+
+      .cart-btn {
+        bottom: 1rem;
+        left: 1rem;
+        padding: 0.8rem 1.2rem;
+        font-size: 1rem;
+      }
+
+      .social-bar {
+        padding: 0.5rem 1rem;
+      }
+
+      .product-actions {
+        flex-direction: column;
+      }
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body><!-- Social Media Bar -->
+  <div class="social-bar"><button class="lang-switch" onclick="toggleLanguage()"> <span id="lang-text">EN</span> 🌐 </button> <a href="https://t.me/boxel_padid" target="_blank" rel="noopener noreferrer" class="social-link telegram"> <span id="telegram-text">تلگرام</span> </a> <a href="https://www.instagram.com/boxel_padid_foolad" target="_blank" rel="noopener noreferrer" class="social-link instagram"> <span id="instagram-text">اینستاگرام</span> </a>
+  </div><!-- Header -->
+  <header class="header">
+   <div class="header-content">
+    <div class="logo"><img src="https://i.imgur.com/y5TVJIC.jpeg" alt="لوگو بکسل پدید فولاد" class="logo-img" onerror="this.style.display='none';">
+     <div class="logo-text"><span class="logo-main-text" id="header-logo">بکسل پدید فولاد</span> <span class="logo-slogan" id="header-slogan">هرکس باری داره با ما سر و کاری داره</span>
+     </div>
+    </div>
+    <nav class="nav"><a href="#about" id="nav-about">درباره ما</a> <a href="#services" id="nav-services">خدمات</a> <a href="#products" id="nav-products">محصولات</a> <a href="#industries" id="nav-industries">صنایع</a> <a href="#contact" id="nav-contact">تماس با ما</a>
+    </nav>
+   </div>
+  </header><!-- Cart Button --> <button class="cart-btn" onclick="openCart()"> <span>🛒</span> <span id="cart-btn-text">سبد خرید</span> <span class="cart-count" id="cart-count">0</span> </button> <!-- Hero Section -->
+  <section class="hero">
+   <div class="hero-content">
+    <h1 id="hero-title">بکسل پدید فولاد</h1>
+    <p class="hero-subtitle" id="hero-subtitle">تامین کننده معتبر سیم بکسل، زنجیر، تسمه و تجهیزات لیفتینگ</p>
+    <div class="hero-badges">
+     <div class="badge" id="badge-experience">
+      30 سال تجربه
+     </div>
+     <div class="badge" id="badge-quality">
+      کیفیت استاندارد
+     </div>
+     <div class="badge" id="badge-shipping">
+      ارسال سریع
+     </div>
+     <div class="badge" id="badge-consulting">
+      مشاوره تخصصی
+     </div>
+    </div>
+   </div>
+  </section><!-- About Section -->
+  <section class="section" id="about">
+   <h2 class="section-title" id="about-title">درباره ما</h2>
+   <div class="about-content">
+    <p id="about-p1">شرکت بکسل پدید فولاد با بیش از 30 سال تجربه تخصصی در حوزه تامین و توزیع طناب های فولادی، سیم بکسل، زنجیرهای باربری و تجهیزات لیفتینگ، به عنوان یکی از معتبرترین مجموعه های ارائه دهنده محصولات ایمنی و حمل بار در کشور شناخته می شود.</p>
+    <p id="about-p2">ما با بهره گیری از امکانات گسترده انبارداری و بازرگانی، توانایی تامین انواع محصولات از منابع داخلی و خارجی، مطابق با استانداردهای جهانی و همراه با ارائه سرتیفیکیت را داریم. هدف ما ارائه راهکارهای مطمئن، اقتصادی و ایمن برای صنایع مختلف است و خدمات ما تنها به فروش محدود نمی شود بلکه شامل مشاوره فنی، راهنمایی انتخاب محصول و پشتیبانی کامل پس از فروش نیز می گردد.</p>
+   </div>
+  </section><!-- Services Section -->
+  <section class="section" id="services">
+   <h2 class="section-title" id="services-title">خدمات ما</h2>
+   <div class="services-grid">
+    <div class="service-card">
+     <div class="service-icon">
+      🔗
+     </div>
+     <h3 class="service-title" id="service1-title">تامین طناب های فولادی</h3>
+     <p id="service1-desc">تامین و توزیع طناب های فولادی و سیم بکسل با بالاترین کیفیت</p>
+    </div>
+    <div class="service-card">
+     <div class="service-icon">
+      ⛓️
+     </div>
+     <h3 class="service-title" id="service2-title">زنجیر و حلقه فولادی</h3>
+     <p id="service2-desc">فروش انواع زنجیر باربری، زنجیر چرخ و حلقه های فولادی</p>
+    </div>
+    <div class="service-card">
+     <div class="service-icon">
+      📦
+     </div>
+     <h3 class="service-title" id="service3-title">تسمه حمل بار</h3>
+     <p id="service3-desc">ارائه تسمه های حمل بار و تسمه های جغجغه ای</p>
+    </div>
+    <div class="service-card">
+     <div class="service-icon">
+      🏗️
+     </div>
+     <h3 class="service-title" id="service4-title">تجهیزات لیفتینگ</h3>
+     <p id="service4-desc">فروش انواع پولیفت، قرقره و تجهیزات لیفتینگ</p>
+    </div>
+    <div class="service-card">
+     <div class="service-icon">
+      ✅
+     </div>
+     <h3 class="service-title" id="service5-title">محصولات استاندارد</h3>
+     <p id="service5-desc">ارائه محصولات استاندارد همراه با سرتیفیکیت</p>
+    </div>
+    <div class="service-card">
+     <div class="service-icon">
+      💡
+     </div>
+     <h3 class="service-title" id="service6-title">مشاوره فنی</h3>
+     <p id="service6-desc">مشاوره فنی تخصصی و پشتیبانی کامل</p>
+    </div>
+   </div>
+  </section><!-- Products Section -->
+  <section class="section" id="products" style="background: #f8f8f8; padding: 4rem 2rem; margin: 0; max-width: 100%;">
+   <div style="max-width: 1200px; margin: 0 auto;">
+    <h2 class="section-title" id="products-title">محصولات ما</h2>
+    <div class="products-grid" id="products-grid"></div>
+   </div>
+  </section><!-- Product Detail Modal -->
+  <div id="detail-modal" class="modal">
+   <div class="modal-content"><button class="close-modal" onclick="closeDetailModal()">✕</button>
+    <div id="modal-detail-content"></div>
+   </div>
+  </div><!-- Cart Modal -->
+  <div id="cart-modal" class="cart-modal">
+   <div class="cart-modal-content"><button class="close-modal" onclick="closeCart()">✕</button>
+    <h2 id="cart-modal-title">سبد خرید شما</h2>
+    <div id="cart-items-container"></div>
+    <div class="cart-total">
+     <div class="cart-total-amount"><span id="total-label">جمع کل:</span> <span id="cart-total-amount">تماس بگیرید</span>
+     </div><button class="checkout-btn" id="proceed-checkout-btn" onclick="showCheckoutForm()">ادامه خرید</button>
+    </div>
+    <div class="checkout-form" id="checkout-form">
+     <h3 id="checkout-form-title">اطلاعات تحویل گیرنده</h3>
+     <form id="order-form" onsubmit="submitOrder(event)">
+      <div class="form-group"><label for="customer-name" id="label-name">نام و نام خانوادگی:</label> <input type="text" id="customer-name" required>
+      </div>
+      <div class="form-group"><label for="customer-email" id="label-email">ایمیل:</label> <input type="email" id="customer-email" required>
+      </div>
+      <div class="form-group"><label for="customer-phone" id="label-phone">شماره تماس:</label> <input type="tel" id="customer-phone" required>
+      </div><button type="submit" class="submit-order-btn" id="submit-order-btn">ثبت سفارش</button>
+     </form>
+     <div class="success-message" id="success-message"></div>
+    </div>
+   </div>
+  </div><!-- Industries Section -->
+  <section class="section" id="industries">
+   <h2 class="section-title" id="industries-title">صنایعی که به آنها خدمت می کنیم</h2>
+   <div class="industries-grid">
+    <div class="industry-item">
+     <div class="industry-icon">
+      🛢️
+     </div><span id="ind1">نفت و گاز</span>
+    </div>
+    <div class="industry-item">
+     <div class="industry-icon">
+      🏭
+     </div><span id="ind2">پتروشیمی</span>
+    </div>
+    <div class="industry-item">
+     <div class="industry-icon">
+      🚢
+     </div><span id="ind3">حمل و نقل دریایی</span>
+    </div>
+    <div class="industry-item">
+     <div class="industry-icon">
+      ⚙️
+     </div><span id="ind4">فرآیندهای صنعتی</span>
+    </div>
+    <div class="industry-item">
+     <div class="industry-icon">
+      ⛏️
+     </div><span id="ind5">معادن</span>
+    </div>
+    <div class="industry-item">
+     <div class="industry-icon">
+      🔨
+     </div><span id="ind6">حفاری</span>
+    </div>
+    <div class="industry-item">
+     <div class="industry-icon">
+      🏗️
+     </div><span id="ind7">صنعت فولاد</span>
+    </div>
+    <div class="industry-item">
+     <div class="industry-icon">
+      🪨
+     </div><span id="ind8">سنگبری</span>
+    </div>
+    <div class="industry-item">
+     <div class="industry-icon">
+      🏢
+     </div><span id="ind9">سیمان</span>
+    </div>
+    <div class="industry-item">
+     <div class="industry-icon">
+      🏗️
+     </div><span id="ind10">سدسازی</span>
+    </div>
+    <div class="industry-item">
+     <div class="industry-icon">
+      🏢
+     </div><span id="ind11">آسانسوری</span>
+    </div>
+    <div class="industry-item">
+     <div class="industry-icon">
+      🐔
+     </div><span id="ind12">مرغداری</span>
+    </div>
+    <div class="industry-item">
+     <div class="industry-icon">
+      ⚡
+     </div><span id="ind13">برق</span>
+    </div>
+    <div class="industry-item">
+     <div class="industry-icon">
+      🏭
+     </div><span id="ind14">کارخانه های صنعتی</span>
+    </div>
+   </div>
+  </section><!-- Contact Section -->
+  <section class="section" id="contact">
+   <h2 class="section-title" id="contact-title">تماس با ما</h2>
+   <div class="contact-content">
+    <div class="contact-card">
+     <div class="contact-icon">
+      📍
+     </div>
+     <h3 class="contact-title" id="address-title">آدرس</h3>
+     <p class="contact-info" id="contact-address">تهران - میدان قزوین - خیابان قزوین - روبروی خیابان مخصوص - پلاک 366</p>
+    </div>
+    <div class="contact-card">
+     <div class="contact-icon">
+      📞
+     </div>
+     <h3 class="contact-title" id="phone-title">تماس</h3>
+     <p class="contact-info" id="contact-phone"><strong>موبایل:</strong> 09126123870<br><strong>تلفن ثابت:</strong> 021-55411809</p>
+    </div>
+    <div class="contact-card">
+     <div class="contact-icon">
+      ⏰
+     </div>
+     <h3 class="contact-title" id="hours-title">ساعات کاری</h3>
+     <p class="contact-info" id="working-hours">شنبه تا پنجشنبه<br>
+      8:00 صبح تا 6:00 عصر</p>
+    </div>
+   </div>
+  </section><!-- Footer -->
+  <footer class="footer">
+   <p id="footer-copyright">© 1403 بکسل پدید فولاد. تمامی حقوق محفوظ است.</p>
+   <p id="footer-slogan">هرکس باری داره با ما سر و کاری داره</p>
+  </footer>
+  <script>
+    // Initialize EmailJS
+    emailjs.init("o3M6Xhk1ns36qmu2G");
+
+    // Product Data
+    const productsData = {
+      fa: [
+        {
+          id: 'product1',
+          title: 'حلقه فولادی',
+          image: 'https://i.imgur.com/TkjOwpd.jpeg',
+          shortDesc: 'اتصال، مهاربندی، لیفتینگ، ساخت اسلینگ ها',
+          price: 'تماس بگیرید',
+          fullDesc: 'حلقه فولادی یک قطعه اتصال بسیار مقاوم است که در سیستم های لیفتینگ، زنجیرها، سیم بکسل ها و تجهیزات جابه جایی بار استفاده می شود.',
+          uses: ['اتصال زنجیر، سیم بکسل و قلاب', 'استفاده در جرثقیل ها و بالابرها', 'استفاده در کارگاه ها، انبارها و پروژه های صنعتی', 'مناسب برای مهار و حمل بارهای سنگین'],
+          advantages: ['مقاومت بسیار بالا در برابر کشش', 'سخت کاری و آبکاری برای جلوگیری از خوردگی', 'ایمنی بالا در سیستم های لیفتینگ', 'طول عمر طولانی حتی در محیط های سخت صنعتی']
+        },
+        {
+          id: 'product2',
+          title: 'زنجیر چرخ',
+          image: 'https://i.imgur.com/EJQBA5L.jpeg',
+          shortDesc: 'جلوگیری از لغزش خودروهای سنگین و صنعتی',
+          price: 'تماس بگیرید',
+          fullDesc: 'زنجیر چرخ برای افزایش چسبندگی لاستیک در برف، یخ و جاده های لغزنده استفاده می شود.',
+          uses: ['خودروهای سواری، SUV و وانت', 'خودروهای سنگین و ماشین آلات راه سازی', 'جلوگیری از لغزش در برف، یخ و شیب ها'],
+          advantages: ['امنیت بسیار بالاتر در زمستان', 'نصب و استفاده آسان', 'دوام بالا در شرایط سخت', 'مناسب برای سفرهای بین شهری در برف']
+        },
+        {
+          id: 'product3',
+          title: 'زنجیر باربری نوع A',
+          image: 'https://i.imgur.com/BNDlgci.jpeg',
+          shortDesc: 'حمل بار، مهار بار، لیفتینگ سنگین',
+          price: 'تماس بگیرید',
+          fullDesc: 'زنجیر باربری نوع A یک زنجیر پرقدرت برای لیفتینگ، جابه جایی، مهار و حمل بارهای سنگین است.',
+          uses: ['مهار بار در تریلرها و خودروهای باربری', 'جرثقیل ها و سیستم های بالابری', 'صنایع فولادی، انبارداری، حمل بار سنگین', 'گره زنی و اتصال در شرایط سخت صنعتی'],
+          advantages: ['مقاومت بسیار بالا در کشش', 'ایمنی و استاندارد صنعتی', 'ضدسایش و ضدخوردگی', 'مناسب برای کارهای پیوسته و سنگین']
+        },
+        {
+          id: 'product4',
+          title: 'تسمه حمل بار',
+          image: 'https://i.imgur.com/jIhZOFO.jpeg',
+          shortDesc: 'جابه جایی و بلند کردن بار',
+          price: 'تماس بگیرید',
+          fullDesc: 'تسمه حمل بار از الیاف فوق مقاوم تولید شده و وزن کم، انعطاف بالا و قدرت لیفتینگ فوق العاده ای دارد.',
+          uses: ['لیفتینگ توسط جرثقیل', 'حمل بار در کارگاه ها و انبارها', 'حمل تجهیزات حساس بدون آسیب', 'پروژه های عمرانی، صنعتی و ساختمانی'],
+          advantages: ['وزن سبک تر نسبت به زنجیر', 'عدم آسیب به کالا هنگام لیفت', 'مقاومت بالا در برابر فشار', 'ایمنی بالا و قابل اعتماد']
+        },
+        {
+          id: 'product5',
+          title: 'پولیفت',
+          image: 'https://i.imgur.com/ipEh3J8.jpeg',
+          shortDesc: 'بالا کشیدن و جابه جایی بار با نیروی دست',
+          price: 'تماس بگیرید',
+          fullDesc: 'پولیفت یک دستگاه دستی برای کشش و بالا بردن بار است. با اهرم قوی و سیستم قفل ایمن، کنترل دقیق بار را فراهم می کند.',
+          uses: ['بالابری در کارگاه ها و پروژه های صنعتی', 'کشش و مهار بار', 'تعمیرات صنعتی و نصب تجهیزات', 'کاربرد در ارتفاع یا فضاهای محدود'],
+          advantages: ['کنترل کامل روی حرکت بار', 'ایمنی بالا با سیستم قفل کن', 'مناسب برای فضاهای تنگ', 'طراحی مقاوم و بادوام']
+        },
+        {
+          id: 'product6',
+          title: 'انواع قرقره',
+          image: 'https://i.imgur.com/sB5OaaN.jpeg',
+          shortDesc: 'تغییر جهت نیروی کششی، لیفتینگ، مهاربندی',
+          price: 'تماس بگیرید',
+          fullDesc: 'قرقره های صنعتی برای تغییر مسیر کابل یا افزایش قدرت کشش استفاده می شوند.',
+          uses: ['سیستم های لیفتینگ و بالابری', 'مهار و جابه جایی بار', 'استفاده همراه سیم بکسل و طناب', 'پروژه های ساختمانی و صنعتی'],
+          advantages: ['کاهش فشار روی نیروی کشش', 'حرکت روان کابل', 'تقویت توان بالابری', 'ساختار مستحکم و ایمن']
+        },
+        {
+          id: 'product7',
+          title: 'سیم بکسل',
+          image: 'https://i.imgur.com/9Fd9C7u.jpeg',
+          shortDesc: 'لیفتینگ، تاورکرین، جرثقیل',
+          price: 'تماس بگیرید',
+          fullDesc: 'سیم بکسل از چندین رشته فولادی تابیده ساخته شده و برای کشش، لیفتینگ و مهاربندی بارهای سنگین استفاده می شود.',
+          uses: ['جرثقیل ها و آسانسورها', 'بالابرها، لیفتینگ و کشش', 'مهاربندی سازه ها', 'صنایع نفت، گاز و بنادر'],
+          advantages: ['مقاومت فوق العاده در کشش', 'انعطاف پذیری مناسب', 'طول عمر بسیار بالا', 'مناسب برای شرایط سخت محیطی']
+        },
+        {
+          id: 'product8',
+          title: 'تسمه جغجغه ای',
+          image: 'https://i.imgur.com/ZxAbqGP.jpeg',
+          shortDesc: 'مهار بار در حمل و نقل',
+          price: 'تماس بگیرید',
+          fullDesc: 'تسمه جغجغه ای وسیله ای برای مهار، فیکس و تثبیت بار در خودروهای حمل بار است.',
+          uses: ['مهار بار روی کامیون و تریلر', 'بسته بندی و حمل تجهیزات صنعتی', 'ثابت نگه داشتن بارهای حساس', 'حمل ونقل جاده ای طولانی'],
+          advantages: ['قفل جغجغه ای بسیار ایمن', 'نصب سریع و آسان', 'مقاومت بالا در برابر فشار', 'جلوگیری از حرکت بار در مسیر']
+        }
+      ],
+      en: [
+        {
+          id: 'product1',
+          title: 'Steel Ring',
+          image: 'https://i.imgur.com/TkjOwpd.jpeg',
+          shortDesc: 'Connection, anchoring, lifting, sling construction',
+          price: 'Contact Us',
+          fullDesc: 'Steel ring is a highly durable connection piece used in lifting systems, chains, wire ropes and load handling equipment.',
+          uses: ['Chain, wire rope and hook connection', 'Use in cranes and hoists', 'Use in workshops, warehouses and industrial projects', 'Suitable for securing and transporting heavy loads'],
+          advantages: ['Very high tensile strength', 'Hardened and galvanized to prevent corrosion', 'High safety in lifting systems', 'Long service life even in harsh industrial environments']
+        },
+        {
+          id: 'product2',
+          title: 'Snow Chain',
+          image: 'https://i.imgur.com/EJQBA5L.jpeg',
+          shortDesc: 'Prevents slipping of heavy and industrial vehicles',
+          price: 'Contact Us',
+          fullDesc: 'Snow chains are used to increase tire grip on snow, ice and slippery roads.',
+          uses: ['Passenger cars, SUVs and pickups', 'Heavy vehicles and road construction machinery', 'Prevents slipping on snow, ice and slopes'],
+          advantages: ['Much higher safety in winter', 'Easy installation and use', 'High durability in harsh conditions', 'Suitable for intercity travel in snow']
+        },
+        {
+          id: 'product3',
+          title: 'A-Type Cargo Chain',
+          image: 'https://i.imgur.com/BNDlgci.jpeg',
+          shortDesc: 'Load transport, load securing, heavy lifting',
+          price: 'Contact Us',
+          fullDesc: 'Type A cargo chain is a powerful chain for lifting, moving, securing and transporting heavy loads.',
+          uses: ['Load securing in trailers and cargo vehicles', 'Cranes and hoisting systems', 'Steel industries, warehousing, heavy load transport', 'Knotting and connection in harsh industrial conditions'],
+          advantages: ['Very high tensile strength', 'Safety and industrial standards', 'Wear and corrosion resistant', 'Suitable for continuous and heavy work']
+        },
+        {
+          id: 'product4',
+          title: 'Lifting Webbing Sling',
+          image: 'https://i.imgur.com/jIhZOFO.jpeg',
+          shortDesc: 'Moving and lifting loads',
+          price: 'Contact Us',
+          fullDesc: 'Lifting webbing sling is made of ultra-strong fibers and has light weight, high flexibility and excellent lifting power.',
+          uses: ['Crane lifting', 'Load transport in workshops and warehouses', 'Transporting sensitive equipment without damage', 'Civil, industrial and construction projects'],
+          advantages: ['Lighter weight than chain', 'No damage to goods during lifting', 'High pressure resistance', 'High safety and reliability']
+        },
+        {
+          id: 'product5',
+          title: 'Lever Hoist',
+          image: 'https://i.imgur.com/ipEh3J8.jpeg',
+          shortDesc: 'Lifting and moving loads manually',
+          price: 'Contact Us',
+          fullDesc: 'Lever hoist is a manual device for pulling and lifting loads. With a strong lever and safe locking system, it provides precise load control.',
+          uses: ['Lifting in workshops and industrial projects', 'Load pulling and securing', 'Industrial repairs and equipment installation', 'Use at height or in confined spaces'],
+          advantages: ['Complete control over load movement', 'High safety with locking system', 'Suitable for tight spaces', 'Durable and robust design']
+        },
+        {
+          id: 'product6',
+          title: 'Industrial Pulleys',
+          image: 'https://i.imgur.com/sB5OaaN.jpeg',
+          shortDesc: 'Changing pulling force direction, lifting, anchoring',
+          price: 'Contact Us',
+          fullDesc: 'Industrial pulleys are used to change cable direction or increase pulling power.',
+          uses: ['Lifting and hoisting systems', 'Load securing and moving', 'Use with wire rope and rope', 'Construction and industrial projects'],
+          advantages: ['Reduces tension on pulling force', 'Smooth cable movement', 'Enhances lifting power', 'Strong and safe structure']
+        },
+        {
+          id: 'product7',
+          title: 'Steel Wire Rope',
+          image: 'https://i.imgur.com/9Fd9C7u.jpeg',
+          shortDesc: 'Lifting, tower cranes, cranes',
+          price: 'Contact Us',
+          fullDesc: 'Wire rope is made of several twisted steel strands and is used for pulling, lifting and securing heavy loads.',
+          uses: ['Cranes and elevators', 'Hoists, lifting and pulling', 'Structure anchoring', 'Oil, gas and port industries'],
+          advantages: ['Exceptional tensile strength', 'Suitable flexibility', 'Very long service life', 'Suitable for harsh environmental conditions']
+        },
+        {
+          id: 'product8',
+          title: 'Ratchet Strap',
+          image: 'https://i.imgur.com/ZxAbqGP.jpeg',
+          shortDesc: 'Load securing in transport',
+          price: 'Contact Us',
+          fullDesc: 'Ratchet strap is a tool for securing, fixing and stabilizing loads in cargo vehicles.',
+          uses: ['Load securing on trucks and trailers', 'Packaging and transporting industrial equipment', 'Keeping sensitive loads stable', 'Long-distance road transport'],
+          advantages: ['Very safe ratchet lock', 'Quick and easy installation', 'High pressure resistance', 'Prevents load movement during transport']
+        }
+      ]
+    };
+
+    // Shopping Cart
+    let cart = [];
+    let currentLang = 'fa';
+
+    // Translations
+    const translations = {
+      fa: {
+        instagram: 'اینستاگرام',
+        telegram: 'تلگرام',
+        langBtn: 'EN',
+        cartBtn: 'سبد خرید',
+        navAbout: 'دربار�� ما',
+        navServices: 'خدمات',
+        navProducts: 'محصولات',
+        navIndustries: 'صنایع',
+        navContact: 'تماس با ما',
+        heroTitle: 'بکسل پدید فولاد',
+        heroSubtitle: 'تامین کننده معتبر سیم بکسل، زنجیر، تسمه و تجهیزات لیفتینگ',
+        badgeExp: '30 سال تجربه',
+        badgeQuality: 'کیفیت استاندارد',
+        badgeShipping: 'ارسال سریع',
+        badgeConsult: 'مشاوره تخصصی',
+        aboutTitle: 'درباره ما',
+        aboutP1: 'شرکت بکسل پدید فولاد با بیش از 30 سال تجربه تخصصی در حوزه تامین و توزیع طناب های فولادی، سیم بکسل، زنجیرهای باربری و تجهیزات لیفتینگ، به عنوان یکی از معتبرترین مجموعه های ارائه دهنده محصولات ایمنی و حمل بار در کشور شناخته می شود.',
+        aboutP2: 'ما با بهره گیری از امکانات گسترده انبارداری و بازرگانی، توانایی تامین انواع محصولات از منابع داخلی و خارجی، مطابق با استانداردهای جهانی و همراه با ارائه سرتیفیکیت را داریم.',
+        servicesTitle: 'خدمات ما',
+        service1Title: 'تامین طناب های فولادی',
+        service1Desc: 'تامین و توزیع طناب های فولادی و سیم بکسل با بالاترین کیفیت',
+        service2Title: 'زنجیر و حلقه فولادی',
+        service2Desc: 'فروش انواع زنجیر باربری، زنجیر چرخ و حلقه های فولادی',
+        service3Title: 'تسمه حمل بار',
+        service3Desc: 'ارائه تسمه های حمل بار و تسمه های جغجغه ای',
+        service4Title: 'تجهیزات لیفتینگ',
+        service4Desc: 'فروش انواع پولیفت، قرقره و تجهیزات لیفتینگ',
+        service5Title: 'محصولات استاندارد',
+        service5Desc: 'ارائه محصولات استاندارد همراه با سرتیفیکیت',
+        service6Title: 'مشاوره فنی',
+        service6Desc: 'مشاوره فنی تخصصی و پشتیبانی کامل',
+        productsTitle: 'محصولات ما',
+        detailsBtn: 'جزئیات بیشتر',
+        addToCart: 'افزودن به سبد',
+        industriesTitle: 'صنایعی که به آنها خدمت می کنیم',
+        ind1: 'نفت و گاز',
+        ind2: 'پتروشیمی',
+        ind3: 'حمل و نقل دریایی',
+        ind4: 'فرآیندهای صنعتی',
+        ind5: 'معادن',
+        ind6: 'حفاری',
+        ind7: 'صنعت فولاد',
+        ind8: 'سنگبری',
+        ind9: 'سیمان',
+        ind10: 'سدسازی',
+        ind11: 'آسانسوری',
+        ind12: 'مرغداری',
+        ind13: 'برق',
+        ind14: 'کارخانه های صنعتی',
+        contactTitle: 'تماس با ما',
+        addressTitle: 'آدرس',
+        phoneTitle: 'تماس',
+        hoursTitle: 'ساعات کاری',
+        address: 'تهران - میدان قزوین - خیابان قزوین - روبروی خیابان مخصوص - پلاک 366',
+        phone: '<strong>موبایل:</strong> 09126123870<br><strong>تلفن ثابت:</strong> 021-55411809',
+        workingHours: 'شنبه تا پنجشنبه<br>8:00 صبح تا 6:00 عصر',
+        footerCopy: '© 1403 بکسل پدید فولاد. تمامی حقوق محفوظ است.',
+        footerSlogan: 'هرکس باری داره با ما سر و کاری داره',
+        cartModalTitle: 'سبد خرید شما',
+        totalLabel: 'جمع کل:',
+        proceedCheckout: 'ادامه خرید',
+        checkoutFormTitle: 'اطلاعات تحویل گیرنده',
+        labelName: 'نام و نام خانوادگی:',
+        labelEmail: 'ایمیل:',
+        labelPhone: 'شماره تماس:',
+        submitOrder: 'ثبت سفارش',
+        usesTitle: 'کاربردها:',
+        advantagesTitle: 'مزایا:',
+        emptyCart: 'سبد خرید شما خالی است',
+        quantity: 'تعداد:',
+        remove: 'حذف',
+        orderSuccess: '✅ سفارش شما با موفقیت ثبت شد! به زودی با شما تماس می گیریم.',
+        orderError: '❌ خطا در ثبت سفارش. لطفا دوباره تلاش کنید.'
+      },
+      en: {
+        instagram: 'Instagram',
+        telegram: 'Telegram',
+        langBtn: 'فا',
+        cartBtn: 'Shopping Cart',
+        navAbout: 'About Us',
+        navServices: 'Services',
+        navProducts: 'Products',
+        navIndustries: 'Industries',
+        navContact: 'Contact Us',
+        heroTitle: 'Boxel Padid Foolad',
+        heroSubtitle: 'Trusted Supplier of Wire Rope, Chains, Straps and Lifting Equipment',
+        badgeExp: '30 Years Experience',
+        badgeQuality: 'Standard Quality',
+        badgeShipping: 'Fast Delivery',
+        badgeConsult: 'Expert Consulting',
+        aboutTitle: 'About Us',
+        aboutP1: 'Boxel Padid Foolad Company with over 30 years of specialized experience in the supply and distribution of steel ropes, wire ropes, cargo chains and lifting equipment, is recognized as one of the most reputable providers of safety and load handling products in the country.',
+        aboutP2: 'We have the ability to supply various products from domestic and foreign sources, in accordance with international standards and accompanied by certificates, using extensive warehousing and commercial facilities.',
+        servicesTitle: 'Our Services',
+        service1Title: 'Steel Rope Supply',
+        service1Desc: 'Supply and distribution of steel ropes and wire ropes with highest quality',
+        service2Title: 'Chains and Steel Rings',
+        service2Desc: 'Sale of various cargo chains, snow chains and steel rings',
+        service3Title: 'Lifting Straps',
+        service3Desc: 'Providing lifting straps and ratchet straps',
+        service4Title: 'Lifting Equipment',
+        service4Desc: 'Sale of various lever hoists, pulleys and lifting equipment',
+        service5Title: 'Standard Products',
+        service5Desc: 'Providing standard products with certificates',
+        service6Title: 'Technical Consulting',
+        service6Desc: 'Specialized technical consulting and complete support',
+        productsTitle: 'Our Products',
+        detailsBtn: 'More Details',
+        addToCart: 'Add to Cart',
+        industriesTitle: 'Industries We Serve',
+        ind1: 'Oil & Gas',
+        ind2: 'Petrochemical',
+        ind3: 'Marine Transport',
+        ind4: 'Industrial Processes',
+        ind5: 'Mining',
+        ind6: 'Drilling',
+        ind7: 'Steel Industry',
+        ind8: 'Stone Cutting',
+        ind9: 'Cement',
+        ind10: 'Dam Construction',
+        ind11: 'Elevator',
+        ind12: 'Poultry',
+        ind13: 'Electricity',
+        ind14: 'Industrial Factories',
+        contactTitle: 'Contact Us',
+        addressTitle: 'Address',
+        phoneTitle: 'Phone',
+        hoursTitle: 'Working Hours',
+        address: 'Tehran - Qazvin Square - Qazvin Street - Opposite Makhsous Street - No. 366',
+        phone: '<strong>Mobile:</strong> 09126123870<br><strong>Landline:</strong> 021-55411809',
+        workingHours: 'Saturday to Thursday<br>8:00 AM to 6:00 PM',
+        footerCopy: '© 2024 Boxel Padid Foolad. All rights reserved.',
+        footerSlogan: 'Anyone with a load, deals with us',
+        cartModalTitle: 'Your Shopping Cart',
+        totalLabel: 'Total:',
+        proceedCheckout: 'Proceed to Checkout',
+        checkoutFormTitle: 'Delivery Information',
+        labelName: 'Full Name:',
+        labelEmail: 'Email:',
+        labelPhone: 'Phone Number:',
+        submitOrder: 'Submit Order',
+        usesTitle: 'Uses:',
+        advantagesTitle: 'Advantages:',
+        emptyCart: 'Your cart is empty',
+        quantity: 'Quantity:',
+        remove: 'Remove',
+        orderSuccess: '✅ Your order has been successfully submitted! We will contact you soon.',
+        orderError: '❌ Error submitting order. Please try again.'
+      }
+    };
+
+    // Initialize
+    function init() {
+      renderProducts();
+      updateCartCount();
+    }
+
+    // Render Products
+    function renderProducts() {
+      const productsGrid = document.getElementById('products-grid');
+      const products = productsData[currentLang];
+      
+      productsGrid.innerHTML = products.map(product => `
+        <div class="product-card">
+          <img src="${product.image}" alt="${product.title}" class="product-image" onerror="this.style.display='none';">
+          <div class="product-content">
+            <h3 class="product-title">${product.title}</h3>
+            <p class="product-description"><strong>${currentLang === 'fa' ? 'کاربرد:' : 'Use:'}</strong> ${product.shortDesc}</p>
+            <p class="product-price">${product.price}</p>
+            <div class="product-actions">
+              <button class="details-btn" onclick="showProductDetails('${product.id}')">${translations[currentLang].detailsBtn}</button>
+              <button class="add-to-cart-btn" onclick="addToCart('${product.id}')">
+                <span>🛒</span> ${translations[currentLang].addToCart}
+              </button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Show Product Details
+    function showProductDetails(productId) {
+      const products = productsData[currentLang];
+      const product = products.find(p => p.id === productId);
+      
+      const modalContent = `
+        <h2>${product.title}</h2>
+        <p>${product.fullDesc}</p>
+        <h3>${translations[currentLang].usesTitle}</h3>
+        <ul>${product.uses.map(use => `<li>${use}</li>`).join('')}</ul>
+        <h3>${translations[currentLang].advantagesTitle}</h3>
+        <ul>${product.advantages.map(adv => `<li>${adv}</li>`).join('')}</ul>
+      `;
+      
+      document.getElementById('modal-detail-content').innerHTML = modalContent;
+      document.getElementById('detail-modal').style.display = 'block';
+    }
+
+    function closeDetailModal() {
+      document.getElementById('detail-modal').style.display = 'none';
+    }
+
+    // Add to Cart
+    function addToCart(productId) {
+      const products = productsData[currentLang];
+      const product = products.find(p => p.id === productId);
+      
+      const existingItem = cart.find(item => item.id === productId);
+      if (existingItem) {
+        existingItem.quantity++;
+      } else {
+        cart.push({
+          id: productId,
+          title: product.title,
+          price: product.price,
+          quantity: 1
+        });
+      }
+      
+      updateCartCount();
+      showCartNotification();
+    }
+
+    function showCartNotification() {
+      const btn = document.querySelector('.cart-btn');
+      btn.style.transform = 'scale(1.2)';
+      setTimeout(() => {
+        btn.style.transform = 'scale(1)';
+      }, 300);
+    }
+
+    // Update Cart Count
+    function updateCartCount() {
+      const count = cart.reduce((total, item) => total + item.quantity, 0);
+      document.getElementById('cart-count').textContent = count;
+    }
+
+    // Open Cart
+    function openCart() {
+      renderCartItems();
+      document.getElementById('cart-modal').style.display = 'block';
+      document.getElementById('checkout-form').style.display = 'none';
+      document.getElementById('success-message').style.display = 'none';
+      document.getElementById('proceed-checkout-btn').style.display = 'block';
+    }
+
+    function closeCart() {
+      document.getElementById('cart-modal').style.display = 'none';
+    }
+
+    // Render Cart Items
+    function renderCartItems() {
+      const container = document.getElementById('cart-items-container');
+      
+      if (cart.length === 0) {
+        container.innerHTML = `<p style="text-align: center; padding: 2rem; color: #999;">${translations[currentLang].emptyCart}</p>`;
+        return;
+      }
+      
+      container.innerHTML = cart.map(item => `
+        <div class="cart-item">
+          <div class="cart-item-info">
+            <div class="cart-item-title">${item.title}</div>
+            <div class="cart-item-price">${item.price}</div>
+          </div>
+          <div class="cart-item-quantity">
+            <button class="qty-btn" onclick="decreaseQuantity('${item.id}')">-</button>
+            <span style="font-weight: 700; font-size: 1.1rem;">${item.quantity}</span>
+            <button class="qty-btn" onclick="increaseQuantity('${item.id}')">+</button>
+          </div>
+          <button class="remove-item-btn" onclick="removeFromCart('${item.id}')">${translations[currentLang].remove}</button>
+        </div>
+      `).join('');
+    }
+
+    function increaseQuantity(productId) {
+      const item = cart.find(i => i.id === productId);
+      if (item) {
+        item.quantity++;
+        updateCartCount();
+        renderCartItems();
+      }
+    }
+
+    function decreaseQuantity(productId) {
+      const item = cart.find(i => i.id === productId);
+      if (item && item.quantity > 1) {
+        item.quantity--;
+        updateCartCount();
+        renderCartItems();
+      }
+    }
+
+    function removeFromCart(productId) {
+      cart = cart.filter(item => item.id !== productId);
+      updateCartCount();
+      renderCartItems();
+    }
+
+    // Show Checkout Form
+    function showCheckoutForm() {
+      if (cart.length === 0) {
+        return;
+      }
+      document.getElementById('checkout-form').style.display = 'block';
+      document.getElementById('proceed-checkout-btn').style.display = 'none';
+    }
+
+    // Submit Order
+    async function submitOrder(event) {
+      event.preventDefault();
+      
+      const submitBtn = document.getElementById('submit-order-btn');
+      submitBtn.disabled = true;
+      submitBtn.textContent = currentLang === 'fa' ? 'در حال ا��سال...' : 'Submitting...';
+      
+      const name = document.getElementById('customer-name').value;
+      const email = document.getElementById('customer-email').value;
+      const phone = document.getElementById('customer-phone').value;
+      
+      const orderId = 'ORD-' + Date.now();
+      const orderDate = new Date().toLocaleString('fa-IR');
+      
+      const productsList = cart.map(item => 
+        `- ${item.title} (تعداد: ${item.quantity}) - ${item.price}`
+      ).join('\n');
+      
+      const orderData = {
+        orderId: orderId,
+        customerName: name,
+        customerEmail: email,
+        customerPhone: phone,
+        products: JSON.stringify(cart),
+        totalAmount: translations[currentLang].totalLabel,
+        orderDate: new Date().toISOString(),
+        status: 'pending'
+      };
+      
+      try {
+        // Save to Data SDK first
+        const dataSdkResult = await window.dataSdk.create(orderData);
+        
+        if (!dataSdkResult.isOk) {
+          throw new Error('Failed to save order');
+        }
+        
+        // Send email notification
+        let emailSent = false;
+        try {
+          const emailParams = {
+            to_email: 'boxel.padid@gmail.com',
+            from_name: name,
+            from_email: email,
+            customer_name: name,
+            customer_email: email,
+            customer_phone: phone,
+            order_id: orderId,
+            order_date: orderDate,
+            products_list: productsList,
+            message: `سفارش جدید از ${name}\n\nمحصولات:\n${productsList}\n\nاطلاعات تماس:\nایمیل: ${email}\nتلفن: ${phone}`
+          };
+          
+          const emailResponse = await emailjs.send(
+            'service_vwu4n4e',
+            'template_wd260zq',
+            emailParams
+          );
+          
+          if (emailResponse.status === 200) {
+            emailSent = true;
+          }
+        } catch (emailError) {
+          console.error('Email error:', emailError);
+        }
+        
+        // Show success message
+        if (emailSent) {
+          document.getElementById('success-message').innerHTML = translations[currentLang].orderSuccess + '<br><br>📧 ایمیل اطلاع رسانی ارسال شد.';
+        } else {
+          document.getElementById('success-message').innerHTML = translations[currentLang].orderSuccess + '<br><br>📝 سفارش در سیستم ثبت شد.';
+        }
+        
+        document.getElementById('success-message').style.display = 'block';
+        document.getElementById('success-message').style.background = '#d4edda';
+        document.getElementById('success-message').style.color = '#155724';
+        document.getElementById('order-form').style.display = 'none';
+        
+        // Clear cart
+        cart = [];
+        updateCartCount();
+        
+        // Reset form after delay
+        setTimeout(() => {
+          closeCart();
+          document.getElementById('order-form').reset();
+          document.getElementById('order-form').style.display = 'block';
+          document.getElementById('success-message').style.display = 'none';
+          document.getElementById('proceed-checkout-btn').style.display = 'block';
+        }, 4000);
+        
+      } catch (error) {
+        console.error('Order error:', error);
+        document.getElementById('success-message').innerHTML = translations[currentLang].orderError;
+        document.getElementById('success-message').style.display = 'block';
+        document.getElementById('success-message').style.background = '#f8d7da';
+        document.getElementById('success-message').style.color = '#721c24';
+        submitBtn.disabled = false;
+        submitBtn.textContent = translations[currentLang].submitOrder;
+      }
+    }
+
+    // Language Toggle
+    function toggleLanguage() {
+      currentLang = currentLang === 'fa' ? 'en' : 'fa';
+      document.documentElement.lang = currentLang;
+      document.documentElement.dir = currentLang === 'fa' ? 'rtl' : 'ltr';
+      
+      const t = translations[currentLang];
+      document.getElementById('instagram-text').textContent = t.instagram;
+      document.getElementById('telegram-text').textContent = t.telegram;
+      document.getElementById('lang-text').textContent = t.langBtn;
+      document.getElementById('cart-btn-text').textContent = t.cartBtn;
+      document.getElementById('header-logo').textContent = currentLang === 'fa' ? window.elementSdk?.config.company_name || 'بکسل پدید فولاد' : 'Boxel Padid Foolad';
+      document.getElementById('nav-about').textContent = t.navAbout;
+      document.getElementById('nav-services').textContent = t.navServices;
+      document.getElementById('nav-products').textContent = t.navProducts;
+      document.getElementById('nav-industries').textContent = t.navIndustries;
+      document.getElementById('nav-contact').textContent = t.navContact;
+      document.getElementById('hero-title').textContent = t.heroTitle;
+      document.getElementById('hero-subtitle').textContent = t.heroSubtitle;
+      document.getElementById('badge-experience').textContent = t.badgeExp;
+      document.getElementById('badge-quality').textContent = t.badgeQuality;
+      document.getElementById('badge-shipping').textContent = t.badgeShipping;
+      document.getElementById('badge-consulting').textContent = t.badgeConsult;
+      document.getElementById('about-title').textContent = t.aboutTitle;
+      document.getElementById('about-p1').textContent = t.aboutP1;
+      document.getElementById('about-p2').textContent = t.aboutP2;
+      document.getElementById('services-title').textContent = t.servicesTitle;
+      document.getElementById('service1-title').textContent = t.service1Title;
+      document.getElementById('service1-desc').textContent = t.service1Desc;
+      document.getElementById('service2-title').textContent = t.service2Title;
+      document.getElementById('service2-desc').textContent = t.service2Desc;
+      document.getElementById('service3-title').textContent = t.service3Title;
+      document.getElementById('service3-desc').textContent = t.service3Desc;
+      document.getElementById('service4-title').textContent = t.service4Title;
+      document.getElementById('service4-desc').textContent = t.service4Desc;
+      document.getElementById('service5-title').textContent = t.service5Title;
+      document.getElementById('service5-desc').textContent = t.service5Desc;
+      document.getElementById('service6-title').textContent = t.service6Title;
+      document.getElementById('service6-desc').textContent = t.service6Desc;
+      document.getElementById('products-title').textContent = t.productsTitle;
+      document.getElementById('industries-title').textContent = t.industriesTitle;
+      document.getElementById('ind1').textContent = t.ind1;
+      document.getElementById('ind2').textContent = t.ind2;
+      document.getElementById('ind3').textContent = t.ind3;
+      document.getElementById('ind4').textContent = t.ind4;
+      document.getElementById('ind5').textContent = t.ind5;
+      document.getElementById('ind6').textContent = t.ind6;
+      document.getElementById('ind7').textContent = t.ind7;
+      document.getElementById('ind8').textContent = t.ind8;
+      document.getElementById('ind9').textContent = t.ind9;
+      document.getElementById('ind10').textContent = t.ind10;
+      document.getElementById('ind11').textContent = t.ind11;
+      document.getElementById('ind12').textContent = t.ind12;
+      document.getElementById('ind13').textContent = t.ind13;
+      document.getElementById('ind14').textContent = t.ind14;
+      document.getElementById('contact-title').textContent = t.contactTitle;
+      document.getElementById('address-title').textContent = t.addressTitle;
+      document.getElementById('phone-title').textContent = t.phoneTitle;
+      document.getElementById('hours-title').textContent = t.hoursTitle;
+      document.getElementById('contact-address').textContent = t.address;
+      document.getElementById('contact-phone').innerHTML = t.phone;
+      document.getElementById('working-hours').innerHTML = t.workingHours;
+      document.getElementById('footer-copyright').textContent = t.footerCopy;
+      document.getElementById('footer-slogan').textContent = t.footerSlogan;
+      document.getElementById('cart-modal-title').textContent = t.cartModalTitle;
+      document.getElementById('total-label').textContent = t.totalLabel;
+      document.getElementById('proceed-checkout-btn').textContent = t.proceedCheckout;
+      document.getElementById('checkout-form-title').textContent = t.checkoutFormTitle;
+      document.getElementById('label-name').textContent = t.labelName;
+      document.getElementById('label-email').textContent = t.labelEmail;
+      document.getElementById('label-phone').textContent = t.labelPhone;
+      document.getElementById('submit-order-btn').textContent = t.submitOrder;
+      
+      renderProducts();
+      renderCartItems();
+    }
+
+    // Element SDK Config
+    const defaultConfig = {
+      company_name: "بکسل پدید فولاد",
+      hero_subtitle: "تامین کننده معتبر سیم بکسل، زنجیر، تسمه و تجهیزات لیفتینگ",
+      address: "تهران - میدان قزوین - خیابان قزوین - روبروی خیابان مخصوص - پلاک 366",
+      phone: "موبایل: 09126123870\nتلفن ثابت: 021-55411809"
+    };
+
+    async function onConfigChange(config) {
+      if (currentLang === 'fa') {
+        document.getElementById('header-logo').textContent = config.company_name || defaultConfig.company_name;
+        document.getElementById('hero-title').textContent = config.company_name || defaultConfig.company_name;
+        document.getElementById('hero-subtitle').textContent = config.hero_subtitle || defaultConfig.hero_subtitle;
+        document.getElementById('contact-address').textContent = config.address || defaultConfig.address;
+        
+        const phoneText = config.phone || defaultConfig.phone;
+        document.getElementById('contact-phone').innerHTML = '<strong>موبایل:</strong> ' + phoneText.split('\n')[0].replace('موبایل: ', '') + '<br><strong>تلفن ثابت:</strong> ' + phoneText.split('\n')[1].replace('تلفن ثابت: ', '');
+      }
+    }
+
+    function mapToCapabilities(config) {
+      return {
+        recolorables: [],
+        borderables: [],
+        fontEditable: undefined,
+        fontSizeable: undefined
+      };
+    }
+
+    function mapToEditPanelValues(config) {
+      return new Map([
+        ["company_name", config.company_name || defaultConfig.company_name],
+        ["hero_subtitle", config.hero_subtitle || defaultConfig.hero_subtitle],
+        ["address", config.address || defaultConfig.address],
+        ["phone", config.phone || defaultConfig.phone]
+      ]);
+    }
+
+    // Data SDK Handler
+    const dataHandler = {
+      onDataChanged(data) {
+        console.log('Orders updated:', data);
+      }
+    };
+
+    // Initialize SDKs
+    async function initializeSDKs() {
+      if (window.elementSdk) {
+        window.elementSdk.init({
+          defaultConfig,
+          onConfigChange,
+          mapToCapabilities,
+          mapToEditPanelValues
+        });
+      }
+
+      if (window.dataSdk) {
+        await window.dataSdk.init(dataHandler);
+      }
+    }
+
+    initializeSDKs();
+    init();
+
+    document.querySelectorAll('.nav a').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    window.onclick = function(event) {
+      if (event.target.classList.contains('modal') || event.target.classList.contains('cart-modal')) {
+        event.target.style.display = 'none';
+      }
+    };
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a89fc6f761f6a73',t:'MTc2NDgzNzQ5MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
